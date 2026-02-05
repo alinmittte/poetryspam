@@ -84,17 +84,16 @@
     }
 
 
- img.portrait {
-  position: fixed;          /* wichtig: frei über der seite */
-  top: 100px;
-  left: 100px;
+img.dvd {
+  position: fixed;
   width: 35mm;
   height: 45mm;
   object-fit: cover;
   border-radius: 5px;
-  z-index: 10;              /* über dem rest */
-  pointer-events: none;    /* klicks gehen durch */
+  z-index: 10;
+  pointer-events: none;
 }
+
 
   </style>
 </head>
@@ -105,10 +104,12 @@
     <p> zucker3000 </p>
   </header>
 
-  <!-- Bild zwischen Header und About -->
-  <img src="bilder/bilderScreenshot 2026-02-03 020039.png.png" 
-       alt="awesome image" 
-       class="portrait">
+  <!-- Bilder im dvd effekt -->
+  
+  <img src="bilder/bild1.png" class="dvd">
+  <img src="bilder/bild2.png" class="dvd">
+  <img src="bilder/bild3.png" class="dvd">
+
 
   <main>
     
@@ -237,42 +238,74 @@
     © 2026 aline iris schüpbach
   </footer>
 <script>
-  const dvd = document.querySelector('.portrait');
+  const dvds = document.querySelectorAll('.dvd');
+  const items = [];
 
-  let x = Math.random() * (window.innerWidth - dvd.offsetWidth);
-  let y = Math.random() * (window.innerHeight - dvd.offsetHeight);
+  dvds.forEach(dvd => {
+    const w = dvd.offsetWidth;
+    const h = dvd.offsetHeight;
 
-  let vx = 1.2; // geschwindigkeit horizontal
-  let vy = 1.2; // geschwindigkeit vertikal
+    items.push({
+      el: dvd,
+      x: Math.random() * (window.innerWidth - w),
+      y: Math.random() * (window.innerHeight - h),
+      vx: (Math.random() > 0.5 ? 1 : -1) * (1 + Math.random()),
+      vy: (Math.random() > 0.5 ? 1 : -1) * (1 + Math.random()),
+      w,
+      h
+    });
+  });
+
+  function collide(a, b) {
+    return !(
+      a.x + a.w < b.x ||
+      a.x > b.x + b.w ||
+      a.y + a.h < b.y ||
+      a.y > b.y + b.h
+    );
+  }
 
   function animate() {
-    x += vx;
-    y += vy;
+    items.forEach((item, i) => {
+      item.x += item.vx;
+      item.y += item.vy;
 
-    // rechte / linke kante
-    if (x + dvd.offsetWidth >= window.innerWidth || x <= 0) {
-      vx = -vx;
-    }
+      // rand-kollision
+      if (item.x <= 0 || item.x + item.w >= window.innerWidth) {
+        item.vx *= -1;
+      }
 
-    // untere / obere kante
-    if (y + dvd.offsetHeight >= window.innerHeight || y <= 0) {
-      vy = -vy;
-    }
+      if (item.y <= 0 || item.y + item.h >= window.innerHeight) {
+        item.vy *= -1;
+      }
 
-    dvd.style.left = x + 'px';
-    dvd.style.top = y + 'px';
+      // kollision mit anderen bildern
+      items.forEach((other, j) => {
+        if (i !== j && collide(item, other)) {
+          item.vx *= -1;
+          item.vy *= -1;
+          other.vx *= -1;
+          other.vy *= -1;
+        }
+      });
+
+      item.el.style.left = item.x + 'px';
+      item.el.style.top = item.y + 'px';
+    });
 
     requestAnimationFrame(animate);
   }
 
   animate();
 
-  // bei resize neu einfangen
   window.addEventListener('resize', () => {
-    x = Math.min(x, window.innerWidth - dvd.offsetWidth);
-    y = Math.min(y, window.innerHeight - dvd.offsetHeight);
+    items.forEach(item => {
+      item.x = Math.min(item.x, window.innerWidth - item.w);
+      item.y = Math.min(item.y, window.innerHeight - item.h);
+    });
   });
 </script>
+
 
 </body>
 </html>
