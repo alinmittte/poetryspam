@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aline iris schüpbach – portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* grundfarben & schrift */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #F6F7FA; /* creme */
+      color: #000000;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    a {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #FF5F1F;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 40px 20px;
+      text-align: center;
+      background-color: #F6F7FA; /* gleiche Farbe wie Hintergrund */
+      border-bottom: none;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 10px 0 0 0;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+      padding: 0;
+    }
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #EC5800
+      letter-spacing: 0.5px;
+    }
+
+    /* Absatzabstand nur im "über mich"-Abschnitt */
+    #about p {
+      margin-top: 2em;
+      margin-bottom: 0;
+    }
+
+    p {
+      margin: 5px 0 0 0;
+      font-size: 16px;
+    }
+
+    .project {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #F6F7FA; /* gleiche Farbe wie Hintergrund */
+      border-radius: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      background-color: #F6F7FA; /* gleiche Farbe wie Hintergrund */
+      border-top: none;
+    }
+
+    #contact a {
+      word-break: break-all;
+    }
+
+ img.portrait {
+  position: fixed;          /* wichtig: frei über der seite */
+  top: 100px;
+  left: 100px;
+  width: 35mm;
+  height: 45mm;
+  object-fit: cover;
+  border-radius: 5px;
+  z-index: 10;              /* über dem rest */
+  pointer-events: none;    /* klicks gehen durch */
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>aline iris schüpbach</h1>
+    <p> :-) </p>
+  </header>
+
+  <!-- Bild zwischen Header und About -->
+  <img src="bilder/Screenshot 2026-02-03 020039.png" 
+       alt="Portrait von Aline Iris Schüpbach" 
+       class="portrait">
+
+  <main>
+
+    <section id="about">
+      <h2>über</h2>
+      <p>
+        aline iris schüpbach (sie/keine), *2000 in biel/bienne, schreibt. meistens im kontext darstellender oder bildender kunst und vermittlung. darunter assistenzen zwischen dramaturgie, regie und produktion bei unterschiedlichen theatermacher*innen, support von kompliz*innen und eigene künstlerische praxis. 
+      </p>
+
+      <p>
+        <3 kollektives schreiben, archive, soziale medien und das internet, das verlieren, vergessen und erinnern. und immer immer immer das erzählen.
+      </p>
+      <p>
+        diese website ist zugleich portfolio und playground. / sie versucht sich im coden
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>kontakt</h2>
+      <p>
+        email: <a href="mailto:aline.schuepbach@gmail.com">aline.schuepbach@gmail.com</a> <br>
+        
+        instagram: <a href="https://instagram.com/alinmittte">@alinmittte</a>
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>projekte</h2>
+
+      <div class="project">
+        <h2>poetryspam</h2>
+        <p>kollektiv zucker3000 schreibt. wöchentlich flattert eine mail in die digitalen mailfächer der glücklichen empfänger*innen. willst du auch? schreib eine mail an zuckerdreitausend@gmail.com !</p>
+
+      </div>
+
+      <div class="project">
+        <h2>process.bff</h2>
+        <p>process.bff ist in (re)search of friendship as a (performative) practice, zuletzt im rahmen des sparx-förderpools 2025 von migros kulturprozent. zusammen mit ljubia kohlbrenner.</p>
+      
+      </div>
+
+      <div class="project">
+        <h2>who is georgia</h2>
+        <p>der bieler theaterverein realisiert seit 2019 eigene stücke, bisher unter regie von cyriel ross. </p>
+      
+      </div>
+
+      <div class="project">
+        <h2>texte</h2>
+        <p>ich schreibe.</p>
+      
+      </div>
+
+    </section>
+
+
+  </main>
+
+  <footer>
+    © 2026 aline iris schüpbach
+  </footer>
+<script>
+  const dvd = document.querySelector('.portrait');
+
+  let x = Math.random() * (window.innerWidth - dvd.offsetWidth);
+  let y = Math.random() * (window.innerHeight - dvd.offsetHeight);
+
+  let vx = 1.2; // geschwindigkeit horizontal
+  let vy = 1.2; // geschwindigkeit vertikal
+
+  function animate() {
+    x += vx;
+    y += vy;
+
+    // rechte / linke kante
+    if (x + dvd.offsetWidth >= window.innerWidth || x <= 0) {
+      vx = -vx;
+    }
+
+    // untere / obere kante
+    if (y + dvd.offsetHeight >= window.innerHeight || y <= 0) {
+      vy = -vy;
+    }
+
+    dvd.style.left = x + 'px';
+    dvd.style.top = y + 'px';
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // bei resize neu einfangen
+  window.addEventListener('resize', () => {
+    x = Math.min(x, window.innerWidth - dvd.offsetWidth);
+    y = Math.min(y, window.innerHeight - dvd.offsetHeight);
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
